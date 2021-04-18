@@ -94,17 +94,24 @@ def get_artist(path_name):
         return None
 
 
+# rootdir = 'E:\\Song'
+# rootdir = 'E:\\ChangTag'
+# rootdir = '.\\Song'
+
+
 if __name__ == "__main__":
-    rootdir = 'E:\\Song'
-    #rootdir = 'E:\\ChangTag'
-    #rootdir = os.getcwd()
-    #rootdir = '.\\Song'
+    # 获取当前目录
+    rootdir = os.getcwd()
+    # 获取当前目录中的文件列表并连接成全路径，包括目录
     file_list = map(lambda df: os.path.join(rootdir, df), os.listdir(rootdir))
+    # 筛选出文件
     file_list = list(filter(os.path.isfile, file_list))  # 列出文件夹下所有文件
     for file in file_list:
         print(file, 'proocessing...')
+        # 获取艺人信息
         artist_folder = get_artist(file)
         if artist_folder:
+            # 为艺人生成目录信息
             folder = os.path.join(rootdir, artist_folder)
             # 如果目标路径不存在，构建它
             if not os.path.exists(folder):
